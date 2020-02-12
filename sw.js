@@ -1,8 +1,11 @@
-let cacheName = "cache_v1";
+let cacheName = "cache_v0.2";
 let cachedFiles = [
+    "./img/pause.svg",
+    "./img/start.svg",
     "./index.html",
     "./main.js",
-    "./site.webmanifest"
+    "./site.webmanifest",
+    "./style.css"
 ];
 
 self.addEventListener("install", (event) => {

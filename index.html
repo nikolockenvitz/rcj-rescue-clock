@@ -6,11 +6,57 @@
         <title>RCJ Rescue Clock</title>
 
         <link rel="manifest" href="./site.webmanifest">
-        <!--<link rel="stylesheet" href="./style.css">-->
+        <link rel="stylesheet" href="./style.css">
         <script src="main.js" type="text/javascript" defer></script>
     </head>
 
-    <body>
-        Hello, World!
+    <body class="noselect">
+        <div class="container">
+            <p id="past-time" class="time">0:00</p>
+
+            <table border="0" cellspacing="0"><tr>
+                <td width="20%" style="text-align: right; vertical-align: middle;">
+                    <button type="button" onclick="btnResetTime()">Reset</button>
+                </td>
+                <td width="8%"></td>
+                <td width="44%" style="text-align: center; vertical-align: middle;">
+                    <img id="time-start-pause" src="./img/start.svg" alt="Start/Pause Time" style="width: 100%; max-width: 200px;" />
+                </td>
+                <td width="8%"></td>
+                <td width="20%" style="text-align: left; vertical-align: middle;">
+                    <button type="button" onclick="btnSetTime()">Set</button>
+                </td>
+            </tr></table>
+
+            <p id="remaining-time" class="time">0:00</p>
+        </div>
+
+        <!-- Modal for time input -->
+        <div id="time-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="time-modal-close" class="close">&times;</span>
+                    <h2>Set Time</h2>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <div style="text-align: center; margin-bottom: 2vw;">
+                        <div class="time-input-box">
+                            <div>+</div>
+                            <div><input type="tel" pattern="[0-9]{1,2}" class="number-input-no-spinner" id="time-modal-minutes" value="1" /></div>
+                            <div>-</div>
+                        </div>
+                        <div class="time-input-box">
+                            <div>+</div>
+                            <div><input type="tel" pattern="[0-9]{1,2}" class="number-input-no-spinner" id="time-modal-seconds" value="23" /></div>
+                            <div>-</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="button" id="time-modal-save">Save</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
