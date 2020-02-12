@@ -1,4 +1,4 @@
-let cacheName = "cache_v0.2";
+let cacheName = "cache_v0.3";
 let cachedFiles = [
     "./img/pause.svg",
     "./img/start.svg",
