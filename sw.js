@@ -1,7 +1,8 @@
-let cacheName = "cache_v0.3";
+let cacheName = "cache_v0.4";
 let cachedFiles = [
     "./img/pause.svg",
     "./img/start.svg",
+    "./favicon32x32.png",
     "./index.html",
     "./main.js",
     "./site.webmanifest",
