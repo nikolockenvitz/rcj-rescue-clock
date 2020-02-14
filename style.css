@@ -7,6 +7,14 @@ body {
 
 .container {
     text-align: center;
+    width: 100%;
+
+    /* centering vertically */
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .time {
@@ -23,6 +31,20 @@ table {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+}
+
+span.circle {
+    display: block;
+    height: 1.5em;
+    width: 1.5em;
+    line-height: 1.5em;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #2a2a2e;
+    color: white;
+    text-align: center;
+    font-style: italic;
+    font-family: monospace;
 }
 
 button::-moz-focus-inner,

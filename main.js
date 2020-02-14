@@ -54,8 +54,6 @@ window.onload = function() {
     initializeMissingData();
     addEventListeners();
     initializeTime();
-
-    verticallyCenterContainer(); // TODO: solve with CSS
 };
 
 let loadDataFromLocalStorage = function () {
@@ -356,11 +354,6 @@ let hideTimeModal = function () {
 let showTimeModal = function () {
     document.getElementById("time-modal").style.display = "block";
     document.getElementById("time-modal-seconds").focus();
-};
-
-let verticallyCenterContainer = function () {
-    let container = document.getElementById("main-container");
-    container.style.marginTop = Math.max(0, (window.innerHeight - container.clientHeight)/2) + "px";
 };
 
 
