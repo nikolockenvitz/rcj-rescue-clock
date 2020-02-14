@@ -6,7 +6,7 @@ You can also get there by scanning the QR-Code below.
 Development takes place on [nikolockenvitz.de/rcjclock](https://nikolockenvitz.de/rcjclock).
 
 <p align="center">
-  <img src="./img/qrcode.svg" style="max-width: 300px; border: 20px solid white; margin: 0 auto;"/>
+  <img src="./img/qrcode.svg" width="300" height="300" style="border: 20 solid white;"/>
 </p>
 
 You can start and stop the time and see the past and remaining time.
