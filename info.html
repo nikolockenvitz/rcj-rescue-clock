@@ -22,6 +22,9 @@
         <script type="text/javascript">
             window.onload = function () {
                 showVersion();
+                document.getElementById("qr-code").addEventListener("contextmenu", (event) => {
+                    event.preventDefault();
+                });
             };
 
             let showVersion = async function () {

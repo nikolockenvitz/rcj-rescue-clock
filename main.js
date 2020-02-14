@@ -54,6 +54,7 @@ window.onload = function() {
     initializeMissingData();
     addEventListeners();
     initializeTime();
+    disableContextMenuForGraphics();
 };
 
 let loadDataFromLocalStorage = function () {
@@ -354,6 +355,15 @@ let hideTimeModal = function () {
 let showTimeModal = function () {
     document.getElementById("time-modal").style.display = "block";
     document.getElementById("time-modal-seconds").focus();
+};
+
+let disableContextMenuForGraphics = function () {
+    let elementIds = ["time-start-pause"];
+    for (let elementId of elementIds) {
+        document.getElementById(elementId).addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
+    }
 };
 
 
