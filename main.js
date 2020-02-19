@@ -174,6 +174,7 @@ let updateTime = function () {
     checkForAlerts();
     document.getElementById("past-time").innerText = getRunTimeAsString();
     document.getElementById("remaining-time").innerText = getRemainingTimeAsString();
+    showMilliseconds();
 };
 
 let getRunTimeAsString = function () {
@@ -189,6 +190,11 @@ let getSecondsAsTimeString = function (timeInSeconds) {
     let minutes = pad(Math.floor(timeInSeconds/60));
     let seconds = pad(Math.floor(timeInSeconds%60));
     return minutes + ":" + seconds;
+};
+
+let showMilliseconds = function () {
+    let ms = Math.round((1000 * getRunTimeInSeconds())%1000);
+    document.getElementById("past-time-ms").innerText = pad(ms, 3);
 };
 
 let resetTime = function () {

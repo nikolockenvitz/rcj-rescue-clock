@@ -18,13 +18,22 @@ body {
 }
 
 .time {
+    position: relative;
     display: block;
-    font-size: 5em;
-    padding: 10vmin;
+    padding: 12vmin;
     margin: 0;
+}
+.time span {
+    font-size: 5em;
+    line-height: 0.75em;
 }
 #remaining-time {
     color: #a8a8a8;
+}
+#past-time-ms {
+    position: absolute;
+    top: 12vmin; /* needs to equal padding of box (.time) */
+    font-size: 1em;
 }
 
 table {

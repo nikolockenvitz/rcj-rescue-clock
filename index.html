@@ -18,7 +18,10 @@
 
     <body class="noselect">
         <div id="main-container" class="container">
-            <p id="past-time" class="time">0:00</p>
+            <div class="time">
+                <span id="past-time">0:00</span>
+                <span id="past-time-ms">000</span>
+            </div>
 
             <table border="0" cellspacing="0"><tr>
                 <td width="20%" style="text-align: right; vertical-align: middle;">
@@ -34,7 +37,9 @@
                 </td>
             </tr></table>
 
-            <p id="remaining-time" class="time">0:00</p>
+            <div class="time">
+                <span id="remaining-time">0:00</span>
+            </div>
         </div>
 
         <!-- Modal for time input -->
