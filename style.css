@@ -30,7 +30,7 @@ body {
 #remaining-time {
     color: #a8a8a8;
 }
-#past-time-ms {
+#elapsed-time-ms {
     position: absolute;
     top: 12vmin; /* needs to equal padding of box (.time) */
     font-size: 1em;

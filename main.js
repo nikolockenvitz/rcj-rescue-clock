@@ -4,6 +4,8 @@ const pathImageTimePause = "img/pause.svg";
 const MAXIMUM_MINUTES = 8;
 const MAX_RUN_DURATION = MAXIMUM_MINUTES*60;
 
+const FREQUENCY_UPDATE_TIME_IN_MS = 31;
+
 const frequencyShortAlert = 600;
 const frequencyLongAlert  = 800;
 const durationShortAlert = 200;
@@ -127,7 +129,7 @@ let isTimeRunning = function () {
 
 let startAutoUpdatingTime = function () {
     stopAutoUpdatingTime();
-    intervalIdTime = setInterval(updateTime, 20);
+    intervalIdTime = setInterval(updateTime, FREQUENCY_UPDATE_TIME_IN_MS);
 };
 
 let stopAutoUpdatingTime = function () {
@@ -172,7 +174,7 @@ let getRunTimeInSeconds = function () {
 
 let updateTime = function () {
     checkForAlerts();
-    document.getElementById("past-time").innerText = getRunTimeAsString();
+    document.getElementById("elapsed-time").innerText = getRunTimeAsString();
     document.getElementById("remaining-time").innerText = getRemainingTimeAsString();
     showMilliseconds();
 };
@@ -194,7 +196,7 @@ let getSecondsAsTimeString = function (timeInSeconds) {
 
 let showMilliseconds = function () {
     let ms = Math.round((1000 * getRunTimeInSeconds())%1000);
-    document.getElementById("past-time-ms").innerText = pad(ms, 3);
+    document.getElementById("elapsed-time-ms").innerText = pad(ms, 3);
 };
 
 let resetTime = function () {
