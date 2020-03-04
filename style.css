@@ -176,3 +176,35 @@ input[type="submit"]::-moz-focus-inner {
     margin: 0;
     -moz-appearance: textfield;
 }
+
+/* Menu */
+#menu.modal {
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    color: #fff;
+}
+#menu-close.close {
+    margin-right: 8px;
+}
+#menu-content {
+    margin: 32px;
+    text-align: center;
+}
+#menu-content button {
+    padding: 8px 16px;
+    width: auto;
+    border: 4px solid black;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    /*display: block;*/
+    outline: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: #000;
+    background-color: #fd5e53;
+    text-align: center;
+    cursor: pointer;
+}
+#menu-content button[disabled] {
+    opacity: 0.6;
+    cursor: default;
+}

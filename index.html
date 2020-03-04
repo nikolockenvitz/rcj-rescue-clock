@@ -72,5 +72,23 @@
         <div style="margin: 5px; position: absolute; top: 0; left: 0; z-index: 1;">
             <a href="./info.html"><span class="circle">i</span></a>
         </div>
+        <div style="margin: 5px; position: absolute; top: 0; right: 0; z-index: 1">
+            <svg id="kebab-menu-icon" width="0.9em" height="1.5em" viewBox="0 0 6 10">
+                <circle cx="3" cy="2" r="1" />
+                <circle cx="3" cy="5" r="1" />
+                <circle cx="3" cy="8" r="1" />
+            </svg>
+        </div>
+
+        <!-- Menu -->
+        <div id="menu" class="modal">
+            <div>
+                <span id="menu-close" class="close">&times;</span>
+            </div>
+            <div id="menu-content">
+                <button type="button" id="btn-notifications" disabled>Enable Notifications</button>
+                <p id="debug-text">Hello, World!</p>
+            </div>
+        </div>
     </body>
 </html>

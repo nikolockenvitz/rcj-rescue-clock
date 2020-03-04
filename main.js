@@ -11,17 +11,30 @@ const frequencyLongAlert  = 800;
 const durationShortAlert = 200;
 const durationLongAlert  = 500;
 
+const BEEP_VOLUME = 4;
+
 let shortBeep = function () {
-    beep(frequencyShortAlert, durationShortAlert, 1, "sine");
+    beep(frequencyShortAlert, durationShortAlert, BEEP_VOLUME, "sine");
 };
 
 let longBeep = function () {
-    beep(frequencyLongAlert, durationLongAlert, 1, "sine");
-    window.navigator.vibrate(durationLongAlert*1.2);
+    beep(frequencyLongAlert, durationLongAlert, BEEP_VOLUME, "sine");
+    if (Notification.permission == 'granted') {
+        navigator.serviceWorker.getRegistration().then(function(reg) {
+            let options = {
+                body: getRunTimeAsString(),
+                vibrate: [durationLongAlert*1.2],
+                icon: "img/icon192x192.png",
+                badge: "img/icon192x192.png"
+            };
+            reg.showNotification("Time is over!", options);
+        });
+    }
 };
 
 let annoyingBeep = function () {
-    beep(1000, 1000, 1, "sine");
+    clearAllNotifications();
+    beep(1000, 1000, BEEP_VOLUME, "sine");
 };
 
 let alerts = [
@@ -57,6 +70,7 @@ window.onload = function() {
     addEventListeners();
     initializeTime();
     disableContextMenuForGraphics();
+    updateNotificationButtonInMenu();
 };
 
 let loadDataFromLocalStorage = function () {
@@ -87,6 +101,7 @@ let initializeMissingData = function () {
 let addEventListeners = function () {
     document.getElementById("time-start-pause").addEventListener("click", toggleTimeRunning);
     addEventListenersForTimeModal();
+    addEventListenersForMenu();
 };
 
 let addEventListenersForTimeModal = function () {
@@ -214,6 +229,7 @@ let btnResetTime = function () {
     if (confirm("Are you sure to reset the time? You can't undo this step.")) {
         resetTime();
         hideTimeModal();
+        clearAllNotifications();
     }
 };
 
@@ -355,6 +371,7 @@ let saveTimeFromTimeModal = function () {
     resetAlerts();
     updateTime();
     hideTimeModal();
+    clearAllNotifications();
 };
 
 let hideTimeModal = function () {
@@ -372,6 +389,43 @@ let disableContextMenuForGraphics = function () {
             event.preventDefault();
         });
     }
+};
+
+let addEventListenersForMenu = function () {
+    document.getElementById("kebab-menu-icon").addEventListener("click", showMenu);
+    document.getElementById("menu-close").addEventListener("click", hideMenu);
+
+    document.getElementById("btn-notifications").addEventListener("click", onClickBtnNotifications);
+};
+
+let showMenu = function () {
+    document.getElementById("menu").style.display = "block";
+};
+
+let hideMenu = function () {
+    document.getElementById("menu").style.display = "none";
+};
+
+let updateNotificationButtonInMenu = function () {
+    if ('Notification' in window && navigator.serviceWorker) {
+        document.getElementById("btn-notifications").disabled = false;
+    }
+};
+
+let onClickBtnNotifications = function () {
+    Notification.requestPermission(function(status) {
+        document.getElementById("debug-text").innerText = status;
+    });
+};
+
+let clearAllNotifications = function () {
+    navigator.serviceWorker.getRegistration().then(function(reg) {
+        reg.getNotifications().then(function(notifications) {
+            for (let notification of notifications) {
+                notification.close();
+            }
+        });
+    });
 };
 
 
