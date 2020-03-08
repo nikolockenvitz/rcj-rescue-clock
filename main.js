@@ -399,6 +399,7 @@ let addEventListenersForMenu = function () {
 };
 
 let showMenu = function () {
+    updateNotificationButtonInMenu();
     document.getElementById("menu").style.display = "block";
 };
 
@@ -408,7 +409,16 @@ let hideMenu = function () {
 
 let updateNotificationButtonInMenu = function () {
     if ('Notification' in window && navigator.serviceWorker) {
-        document.getElementById("btn-notifications").disabled = false;
+        if (Notification.permission == 'granted') {
+            document.getElementById("btn-notifications").innerHTML = "Notifications enabled";
+            document.getElementById("btn-notifications").disabled = true;
+        } else {
+            document.getElementById("btn-notifications").innerHTML = "Enable Notifications";
+            document.getElementById("btn-notifications").disabled = false;
+        }
+    } else {
+        document.getElementById("btn-notifications").innerHTML = "Notifications not possible";
+        document.getElementById("btn-notifications").disabled = true;
     }
 };
 
