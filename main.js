@@ -20,15 +20,15 @@ let shortBeep = function () {
 let longBeep = function () {
     beep(frequencyLongAlert, durationLongAlert, BEEP_VOLUME, "sine");
     if (Notification.permission == 'granted') {
-        navigator.serviceWorker.getRegistration().then(function(reg) {
-            let options = {
-                body: getRunTimeAsString(),
-                vibrate: [durationLongAlert*1.2],
-                icon: "img/icon192x192.png",
-                badge: "img/icon192x192.png"
-            };
-            reg.showNotification("Time is over!", options);
+        let notification = new Notification('Time is over!', {
+            body: getRunTimeAsString(),
+            vibrate: [durationLongAlert*1.2],
+            icon: "img/icon192x192.png",
+            badge: "img/icon192x192.png"
         });
+        notification.onclick = function (event) {
+            window.focus();
+        };
     }
 };
 
@@ -429,12 +429,10 @@ let onClickBtnNotifications = function () {
 };
 
 let clearAllNotifications = function () {
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-        reg.getNotifications().then(function(notifications) {
-            for (let notification of notifications) {
-                notification.close();
-            }
-        });
+    Notification.get().then(notifications => {
+        for (let notification of notifications) {
+            notification.close();
+        }
     });
 };
 
