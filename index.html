@@ -1,94 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>RCJ Rescue Clock</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RCJ Rescue Clock</title>
 
-        <link rel="icon" type="image/png" sizes="32x32" href="./favicon32x32.png">
-        <link rel="manifest" href="./site.webmanifest">
-        <link rel="stylesheet" href="./style.css">
-        <script src="main.js" type="text/javascript" defer></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon32x32.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="main.js" type="text/javascript" defer></script>
+    <script src="var-font-size.js" type="text/javascript" defer></script>
 
-        <meta property="og:title" content="RCJ Rescue Clock">
-        <meta property="og:description" content="PWA to stop time during RCJ Rescue">
-        <meta property="og:image" content="https://nikolockenvitz.github.io/rcj-rescue-clock/img/icon512x512.png">
-        <meta property="og:url" content="https://nikolockenvitz.github.io/rcj-rescue-clock">
-    </head>
+    <meta property="og:title" content="RCJ Rescue Clock" />
+    <meta
+      property="og:description"
+      content="PWA to measure time at RCJ Rescue"
+    />
+    <meta
+      property="og:image"
+      content="https://nikolockenvitz.github.io/rcj-rescue-clock/img/icon512x512.png"
+    />
+    <meta
+      property="og:url"
+      content="https://nikolockenvitz.github.io/rcj-rescue-clock"
+    />
+  </head>
 
-    <body class="noselect">
-        <div id="main-container" class="container">
-            <div class="time">
-                <span id="elapsed-time">0:00</span>
-                <span id="elapsed-time-ms">000</span>
-            </div>
+  <body class="noselect">
+    <div id="main-container" class="container">
+      <div class="time">
+        <span id="elapsed-time">0:00</span>
+        <span id="elapsed-time-ms">000</span>
+      </div>
 
-            <table border="0" cellspacing="0"><tr>
-                <td width="20%" style="text-align: right; vertical-align: middle;">
-                    <button type="button" onclick="btnResetTime()">Reset</button>
-                </td>
-                <td width="8%"></td>
-                <td width="44%" style="text-align: center; vertical-align: middle;">
-                    <img id="time-start-pause" src="./img/start.svg" alt="Start/Pause Time" style="width: 100%; max-width: 200px;" />
-                </td>
-                <td width="8%"></td>
-                <td width="20%" style="text-align: left; vertical-align: middle;">
-                    <button type="button" onclick="btnSetTime()">Set</button>
-                </td>
-            </tr></table>
+      <table border="0" cellspacing="0">
+        <tr>
+          <td width="20%" style="text-align: right; vertical-align: middle">
+            <button
+              type="button"
+              onclick="btnResetTime()"
+              class="var-font-size-btn"
+            >
+              Reset
+            </button>
+          </td>
+          <td width="8%"></td>
+          <td width="44%" style="text-align: center; vertical-align: middle">
+            <img
+              id="time-start-pause"
+              src="./img/start.svg"
+              alt="Start/Pause Time"
+              style="width: 100%; max-width: 200px"
+            />
+          </td>
+          <td width="8%"></td>
+          <td width="20%" style="text-align: left; vertical-align: middle">
+            <button
+              type="button"
+              onclick="btnSetTime()"
+              class="var-font-size-btn"
+            >
+              Set
+            </button>
+          </td>
+        </tr>
+      </table>
 
-            <div class="time">
-                <span id="remaining-time">0:00</span>
-            </div>
+      <div class="time">
+        <span id="remaining-time">0:00</span>
+      </div>
+    </div>
+
+    <!-- Modal for time input -->
+    <div id="time-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span id="time-modal-close" class="close">&times;</span>
+          <h2>Set Time</h2>
         </div>
-
-        <!-- Modal for time input -->
-        <div id="time-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span id="time-modal-close" class="close">&times;</span>
-                    <h2>Set Time</h2>
-                </div>
-                <div class="modal-body" style="text-align: center;">
-                    <div style="text-align: center; margin-bottom: 2vw;">
-                        <div class="time-input-box">
-                            <div>+</div>
-                            <div><input type="tel" pattern="[0-9]{1,2}" class="number-input-no-spinner" id="time-modal-minutes" value="1" /></div>
-                            <div>-</div>
-                        </div>
-                        <div class="time-input-box">
-                            <div>+</div>
-                            <div><input type="tel" pattern="[0-9]{1,2}" class="number-input-no-spinner" id="time-modal-seconds" value="23" /></div>
-                            <div>-</div>
-                        </div>
-                    </div>
-                    <div style="text-align: center;">
-                        <button type="button" id="time-modal-save">Save</button>
-                    </div>
-                </div>
+        <div class="modal-body" style="text-align: center">
+          <div style="text-align: center; margin-bottom: 2vw">
+            <div class="time-input-box var-font-size-time-input">
+              <div>+</div>
+              <div>
+                <input
+                  type="tel"
+                  pattern="[0-9]{1,2}"
+                  class="number-input-no-spinner"
+                  id="time-modal-minutes"
+                  value="1"
+                />
+              </div>
+              <div>-</div>
             </div>
-        </div>
-
-        <div style="margin: 5px; position: absolute; top: 0; left: 0; z-index: 1;">
-            <a href="./info.html"><span class="circle">i</span></a>
-        </div>
-        <div style="margin: 5px; position: absolute; top: 0; right: 0; z-index: 1">
-            <svg id="kebab-menu-icon" width="0.9em" height="1.5em" viewBox="0 0 6 10">
-                <circle cx="3" cy="2" r="1" />
-                <circle cx="3" cy="5" r="1" />
-                <circle cx="3" cy="8" r="1" />
-            </svg>
-        </div>
-
-        <!-- Menu -->
-        <div id="menu" class="modal">
-            <div>
-                <span id="menu-close" class="close">&times;</span>
+            <div class="time-input-box var-font-size-time-input">
+              <div>+</div>
+              <div>
+                <input
+                  type="tel"
+                  pattern="[0-9]{1,2}"
+                  class="number-input-no-spinner"
+                  id="time-modal-seconds"
+                  value="23"
+                />
+              </div>
+              <div>-</div>
             </div>
-            <div id="menu-content">
-                <button type="button" id="btn-notifications" disabled>Enable Notifications</button>
-                <p id="debug-text">Hello, World!</p>
-            </div>
+          </div>
+          <div style="text-align: center">
+            <button
+              type="button"
+              id="time-modal-save"
+              class="var-font-size-btn"
+            >
+              Save
+            </button>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+
+    <div style="margin: 5px; position: absolute; top: 0; left: 0; z-index: 1; font-size: 1.5em;">
+      <span id="info-icon" class="circle">i</span>
+    </div>
+    <div style="margin: 5px; position: absolute; top: 0; right: 0; z-index: 1; font-size: 1.5em;">
+      <svg id="kebab-menu-icon" width="0.9em" height="1.5em" viewBox="0 0 6 10">
+        <circle cx="3" cy="2" r="1" />
+        <circle cx="3" cy="5" r="1" />
+        <circle cx="3" cy="8" r="1" />
+      </svg>
+    </div>
+
+    <!-- Menu with settings -->
+    <div id="menu" class="modal">
+      <div>
+        <span id="menu-close" class="close">&times;</span>
+      </div>
+      <div id="menu-content">
+        <button type="button" id="btn-notifications" disabled>
+          Enable Notifications
+        </button>
+        <p id="debug-text">Hello, World!</p>
+        <br />
+        <div id="var-font-size-controls"></div>
+      </div>
+    </div>
+
+    <!-- Info / qr code -->
+    <div id="info" class="modal">
+      <div>
+        <span id="info-close" class="close">&times;</span>
+      </div>
+      <div id="info-content">
+        <img
+          id="qr-code"
+          src="./img/qrcode.svg"
+          alt="https://nikolockenvitz.github.io/rcj-rescue-clock"
+          style="
+            width: 100%;
+            height: 100%;
+            max-width: 75vw;
+            max-height: 75vh;
+            margin: 5vmin;
+          "
+        />
+        <p style="margin: 0 5vmin">
+          <span id="version"></span>
+          <br />
+          Source Code:
+          <a href="https://github.com/nikolockenvitz/rcj-rescue-clock">
+            https://github.com/nikolockenvitz/rcj-rescue-clock
+          </a>
+        </p>
+      </div>
+    </div>
+  </body>
 </html>
